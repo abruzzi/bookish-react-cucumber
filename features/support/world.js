@@ -6,22 +6,20 @@ import ListPage from '../pages/ListPage'
 class CustomWorld {
   constructor() {
     this.browser = null
-    this.page = null
+    this.listPage = null
   }
 
   async start() {
     this.browser = await puppeteer.launch({})
   }
 
-  async gotoPage(page) {
-    if(page === 'list') {
-      this.page = new ListPage(this.browser)
-      await this.page.initialize()
-    }
+  async gotoListPage(page) {
+    this.listPage = new ListPage(this.browser)
+    await this.listPage.initialize()
   }
 
-  async currentPage() {
-    return this.page
+  async getListPage() {
+    return this.listPage
   }
 
   async close() {

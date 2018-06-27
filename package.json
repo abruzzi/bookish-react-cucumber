@@ -12,6 +12,6 @@
     "puppeteer": "^1.0.0"
   },
   "scripts": {
-    "test": "./node_modules/.bin/cucumber-js -r babel-core/register -r babel-polyfill"
+    "test": "./node_modules/.bin/cucumber-js --require-module @babel/register --require-module babel-polyfill"
   }
 }
