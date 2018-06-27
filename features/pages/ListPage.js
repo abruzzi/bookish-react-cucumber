@@ -23,7 +23,8 @@ export default class ListPage {
     async getBooks() {
 	    await this.listPage.waitForSelector('.books')
       return await this.listPage.evaluate(() => {
-        return [...document.querySelectorAll('.book .title')].map(el => el.innerText)
+        const elements = document.querySelectorAll('.book .title')
+        return Array.prototype.slice.call(elements).map(el => el.innerText)
       });
     }
 

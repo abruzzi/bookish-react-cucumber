@@ -13,7 +13,7 @@ class CustomWorld {
     this.browser = await puppeteer.launch({})
   }
 
-  async gotoListPage(page) {
+  async gotoListPage() {
     this.listPage = new ListPage(this.browser)
     await this.listPage.initialize()
   }
