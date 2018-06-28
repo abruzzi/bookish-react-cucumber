@@ -81,6 +81,27 @@ Then(/^there are$/, async function (table) {
   expect(books).to.include.members(actual);
 });
 
+When(/^I typed "([^"]*)" to perform a search$/, async function (keyword) {
+  const page = await this.getListPage()
+  await page.search('design');
+});
+
+Then(/^I should see "([^"]*)" book is matched$/, async function (number) {
+  const page = await this.getListPage()
+  const books = await page.getBooks();
+  expect(books.length).to.eql(parseInt(number))
+});
+
+Then(/^its name is "([^"]*)"$/, async function (name) {
+  const page = await this.getListPage()
+  const books = await page.getBooks();
+  expect(books[0]).to.eql(name)
+});
+
 After(async function() {
   await this.close()
 })
+var myStepDefinitionsWrapper = function () {
+
+};
+module.exports = myStepDefinitionsWrapper;

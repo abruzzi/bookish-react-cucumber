@@ -17,3 +17,10 @@ Feature: Book List
       | Refactoring            |
       | Domain-driven design   |
       | Building Micro-service |
+
+  Scenario: Search by keyword
+    Given I am a bookish user
+    When I open the "list" page
+    And I typed "design" to perform a search
+    Then I should see "1" book is matched
+    And its name is "Domain-driven design"
