@@ -50,6 +50,22 @@ Then(/^I can see the title "([^"]*)" is showing$/, async function (title) {
   expect(heading).to.eql(title);
 })
 
+When(/^I add a review to that book$/, async function (table) {
+  const reviews = table.hashes()
+  const detailPage = await this.getDetailPage()
+  await detailPage.addReview(reviews[0])
+})
+
+Then(/^I can see it shows beneath the description section$/, function () {
+
+})
+
+Then(/^the content is "([^"]*)"$/, async function (content) {
+  const detailPage = await this.getDetailPage()
+  const result = await detailPage.getReview(0)
+  expect(result).to.eql(content);
+})
+
 Then(/^I can see "([^"]*)" books$/, async function (number) {
   const page = await this.getListPage()
   const books = await page.getBooks()
