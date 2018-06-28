@@ -11,9 +11,10 @@
     "babel-polyfill": "^6.26.0",
     "chai": "^4.1.2",
     "cucumber": "^4.2.1",
+    "cucumber-html-reporter": "^4.0.2",
     "puppeteer": "^1.0.0"
   },
   "scripts": {
-    "test": "./node_modules/.bin/cucumber-js --require-module @babel/register --require-module babel-polyfill"
+    "test": "./node_modules/.bin/cucumber-js --require-module @babel/register --require-module babel-polyfill -f json:reports/report.json"
   }
 }
