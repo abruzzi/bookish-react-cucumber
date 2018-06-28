@@ -2,11 +2,13 @@ import puppeteer from 'puppeteer'
 import { setWorldConstructor } from 'cucumber'
 
 import ListPage from '../pages/ListPage'
+import DetailPage from '../pages/DetailPage'
 
 class CustomWorld {
   constructor() {
     this.browser = null
     this.listPage = null
+    this.detailPage = null
   }
 
   async start() {
@@ -16,6 +18,15 @@ class CustomWorld {
   async gotoListPage() {
     this.listPage = new ListPage(this.browser)
     await this.listPage.initialize()
+  }
+
+  async gotoDetailPage(order) {
+    this.detailPage = new DetailPage(this.browser, order)
+    await this.detailPage.initialize()
+  }
+
+  async getDetailPage() {
+    return this.detailPage
   }
 
   async getListPage() {

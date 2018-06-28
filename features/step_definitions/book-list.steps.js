@@ -1,7 +1,9 @@
-import { BeforeAll, Before, After, Given, When, Then } from 'cucumber'
+import { Before, After, Given, When, Then } from 'cucumber'
 import axios from 'axios'
 
 import { expect } from 'chai'
+
+import { APP_BASE_URL } from '../pages/constants'
 
 Before(async function() {
   await this.start()
@@ -26,10 +28,21 @@ Given(/^I am a bookish user$/, function () {
 })
 
 When(/^I open the "([^"]*)" page$/, async function (page) {
-  if(page === 'list') {
-    await this.gotoListPage(page)
-  }
-});
+  await this.gotoListPage()
+})
+
+When(/^I open the book detail page with id "([^"]*)"$/, async function (order) {
+  await this.gotoDetailPage(order)
+})
+
+Then(/^I can see the description "([^"]*)" is showing$/, async function (description) {
+  const detailPage = await this.getDetailPage()
+  const url = await detailPage.getUrl()
+  expect(url).to.eql(`${APP_BASE_URL}/books/1`)
+
+  const desc = await detailPage.getDescription()
+  expect(desc).to.eql(description)
+})
 
 Then(/^I can see the title "([^"]*)" is showing$/, async function (title) {
   const page = await this.getListPage()
